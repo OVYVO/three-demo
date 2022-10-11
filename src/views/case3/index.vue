@@ -1,6 +1,11 @@
 <template>
   <div class="case3-container">
-    <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    <div class="lds-roller">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
     <div id="loading-text-intro"><p>Loading</p></div>
     <div class="content" style="visibility: hidden">
       <nav class="header">
