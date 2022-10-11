@@ -20,7 +20,7 @@ onMounted(()=>{
 
 const initThree = ()=>{
   const scene = new THREE.Scene()
-  const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 )
+  const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 )
   camera.position.set(100, 100, 100)
   camera.lookAt(0,0,0)
 
