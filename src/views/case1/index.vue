@@ -6,7 +6,7 @@
 
 <script setup>// @ts-nocheck
 
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, onUnmounted } from 'vue'
 import * as THREE from 'three'
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"; 
@@ -26,6 +26,11 @@ const sceneReady = ref(false)
 onMounted(()=>{
   initThree()
 })
+
+onUnmounted(()=>{
+  window.removeEventListener('click',()=>{})
+})
+ 
 
 const initThree = () => {
   // three对js中date的封装 https://blog.csdn.net/PirateRaccoon/article/details/121671307
@@ -96,11 +101,13 @@ const initThree = () => {
     distortionScale: 4,
     fog: scene.fog !== undefined
   })
+  water.name = 'water'
   water.rotation.x = - Math.PI / 2;
   scene.add(water);
 
   // 添加天空
   const sky = new Sky();
+  sky.name = 'sky'
   sky.scale.setScalar(10000);
   scene.add(sky);
   
@@ -163,7 +170,31 @@ const initThree = () => {
     renderer.render(scene, camera);
   }
   animate();
+
+  const chooseClick = (e)=> {
+    console.log(e)
+    // 获取点击位置坐标
+    let cx = e.clientX
+    let cy = e.clientY
+    // 将坐标转换成WebGL标准设备坐标
+    let wx = (cx / window.innerWidth) * 2 - 1
+    let wy = -(cy / window.innerHeight) * 2 + 1 
+    // 创建投射器
+    const raycaster = new THREE.Raycaster()
+    // 通过坐标以及投射相机计算射线投射器
+    raycaster.setFromCamera(new THREE.Vector2(wx,wy), camera)
+    // 返回投射器命中网格模型对象
+    const intersects = raycaster.intersectObjects( scene.children );
+    const targetArr = intersects.filter(item => !['water','sky'].includes(item.object.name))
+    console.log(targetArr)
+    const objArr = Array.from(new Set(targetArr.map(item =>item.object)))
+    console.log(objArr)
+  }
+  window.addEventListener('click',chooseClick,-1)
 }
+
+
+
 
 
 </script>
