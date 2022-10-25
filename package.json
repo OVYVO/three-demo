@@ -11,7 +11,8 @@
   "dependencies": {
     "three": "^0.136.0",
     "vue": "^3.2.37",
-    "vue-router": "^4.1.5"
+    "vue-router": "^4.1.5",
+    "yan-utils": "^1.0.6"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.1.0",

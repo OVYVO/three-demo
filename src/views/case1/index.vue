@@ -166,7 +166,7 @@ const initThree = () => {
     controls && controls.update();
     const timer = Date.now() * 0.0005;
     TWEEN && TWEEN.update();
-    camera && (camera.position.y += Math.sin(timer) * .05);
+    camera && (camera.position.z += Math.sin(timer) * .05)
     renderer.render(scene, camera);
   }
   animate();
