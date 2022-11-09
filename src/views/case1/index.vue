@@ -193,10 +193,6 @@ const initThree = () => {
   window.addEventListener('click',chooseClick,-1)
 }
 
-
-
-
-
 </script>
 
 <style lang="less" scoped>
