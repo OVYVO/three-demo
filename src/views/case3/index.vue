@@ -178,9 +178,9 @@ const initThree = () => {
       event.preventDefault();
       cursor.x = event.clientX / window.innerWidth - 0.5;
       cursor.y = event.clientY / window.innerHeight - 0.5;
-      document.querySelector(
-        ".cursor"
-      ).style.cssText = `left: ${event.clientX}px; top: ${event.clientY}px`;
+      const targetDom = document.querySelector(".cursor");
+      if (!targetDom) return;
+      targetDom.style.cssText = `left: ${event.clientX}px; top: ${event.clientY}px`;
     },
     false
   );
