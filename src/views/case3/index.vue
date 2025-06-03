@@ -42,7 +42,7 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { ref, onBeforeUnmount, onMounted } from "vue";
 
 import {
   Scene,
@@ -63,6 +63,8 @@ import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 onMounted(() => {
   initThree();
 });
+
+let eventWatcher = ref(null);
 
 const initThree = () => {
   const contentDom = document.querySelector(".first");
@@ -170,7 +172,7 @@ const initThree = () => {
   });
 
   const cursor = { x: 0, y: 0 };
-  document.addEventListener(
+  eventWatcher.value = document.addEventListener(
     "mousemove",
     (event) => {
       event.preventDefault();
@@ -282,6 +284,10 @@ const initThree = () => {
     animateCamera({ x: -4.8, y: 2.9, z: 3.2 }, { y: -0.75 });
   });
 };
+
+onBeforeUnmount(() => {
+  window.removeEventListener("mousemove", () => {});
+});
 </script>
 
 <style lang="less" scoped>
