@@ -287,6 +287,9 @@ const initThree = () => {
 
 onBeforeUnmount(() => {
   window.removeEventListener("mousemove", () => {});
+  const btn = document.querySelectorAll("nav > .a");
+  btn.forEach((b) => b.removeEventListener("mousemove", () => {}));
+  btn.forEach((b) => b.removeEventListener("mouseleave", () => {}));
 });
 </script>
 
